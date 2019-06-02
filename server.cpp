@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <zmq.h>
-
+#include <iostream>
+#include <string>
+using namespace std;
 int main(int argc, char const *argv[]) {
 
   void* context = zmq_ctx_new();
@@ -13,18 +15,21 @@ int main(int argc, char const *argv[]) {
       zmq_msg_t request;
       zmq_msg_init(&request);
       zmq_msg_recv(&request, respond, 0);
-      printf("Received: %s\n", zmq_msg_data(&request));
+      printf("Received: %s\n",(char*)  zmq_msg_data(&request));
       zmq_msg_close(&request);
-      sleep(1); // sleep one second
 
-      char server_reply[100];
+      char server_reply[50];
+      char msg[80] = "Server's response : ";
       printf("%s", "Enter server reply :");
-      scanf("%s\n", server_reply);
+      cin.getline(server_reply,50);
+      strcat(msg,server_reply);
+      strcat(msg,"          ");
       zmq_msg_t reply;
-      zmq_msg_init_size(&reply, strlen(server_reply));
-      memcpy(zmq_msg_data(&reply), server_reply, strlen(server_reply));
+      zmq_msg_init_size(&reply, strlen(msg));
+      memcpy(zmq_msg_data(&reply), msg, strlen(msg));
       zmq_msg_send(&reply, respond, 0);
       zmq_msg_close(&reply);
+
   }
   zmq_close(respond);
   zmq_ctx_destroy(context);
