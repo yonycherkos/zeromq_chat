@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/luna/zmq/zeromq_chat/client.cpp
+string.h
+-
+stdio.h
+-
+unistd.h
+-
+zmq.h
+-
+iostream
+-
+string
+-
+
