@@ -13,7 +13,7 @@ int main(int argc, char const *argv[]) {
       zmq_msg_t request;
       zmq_msg_init(&request);
       zmq_msg_recv(&request, respond, 0);
-      printf("Received: %s\n", zmq_msg_data(&request));
+      printf("Received: %s\n",(char*) zmq_msg_data(&request));
       zmq_msg_close(&request);
       sleep(1); // sleep one second
 

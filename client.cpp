@@ -8,7 +8,7 @@ int main(int argc, char const *argv[]) {
     void* context = zmq_ctx_new();
     printf("Client Starting....\n");
     void* request = zmq_socket(context, ZMQ_REQ);
-    zmq_connect(request, "tcp://localhost:4040");
+    zmq_connect(request, "tcp://localhost:5050");
     int count = 0;
     for(;;) {
         char client_request[100];
@@ -23,7 +23,7 @@ int main(int argc, char const *argv[]) {
         zmq_msg_t reply;
         zmq_msg_init(&reply);
         zmq_msg_recv(&reply, request, 0);
-        printf("Received: %s\n", zmq_msg_data(&reply));
+        printf("Received: %s\n",(char*) zmq_msg_data(&reply));
         zmq_msg_close(&reply);
         count++;
     }
