@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.9.1)
+project(socket)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
+add_executable(client client.cpp)
+add_executable(server server.cpp)
+target_link_libraries(client zmq)
+target_link_libraries(server zmq)
